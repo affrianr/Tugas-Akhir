@@ -33,7 +33,8 @@ include "auth_user.php";
           <ul class="sidebar-menu">
               <li class="header"><h4><b><center>Menu Panel</center></b></h4></li>
               <li><a href="index.php"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
-					<li class="active"><a href="kerusakan.php"><i class="fa fa-gear"></i><span>Kerusakan</span>
+					<li><a href="kerusakan.php"><i class="fa fa-gear"></i><span>Kerusakan</span>
+					<li class="active"><a href="kuantitatif.php"><i class="fa fa-gear"></i><span>Data Kuantitatif</span>
 			        <li><a href="komponen.php"><i class="fa fa-columns"></i><span>Komponen</span></a></li>
 			        <li><a href="parameter1.php"><i class="fa fa-columns"></i><span>Severity</span></a></li>
 					<li><a href="parameter2.php"><i class="fa fa-columns"></i><span>Occurance</span></a></li>
@@ -68,6 +69,7 @@ include "auth_user.php";
                 <div class="box-body">
 				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalAdd" data-toggle="modal"><i class="fa fa-plus"></i> Add</button></a>
 				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalHitung" data-toggle="modal"><i class="fa fa-plus"></i> Calculate</button></a>
+				<a href="webpage_weibull.php"><button class="btn btn-success" type="button" data-toggle="modal"><i class="fa fa-plus"></i> Visualization Tools</button></a>
                   <br></br>
 				  <table id="data1" class="table table-bordered table-striped table-scalable">
 						<?php
@@ -140,33 +142,7 @@ include "auth_user.php";
 										<input id="timew" row='1' name="timew" type="float" class="form-control" placeholder="Waktu dalam jam"></input>
 									</div>
 							</div>
-							<div class="form-group">
-								<label>Reliability</label>
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-book"></i>
-										</div>
-										<?php
-										if(isset($_POST['Calc']))
-											$shape = $_POST['shape'];
- 											$scale = $_POST['scale'];
-											$timew  = $_POST['timew'];
-											{
-              									 echo exp((-1*pow($timew/$scale,$shape)));
-       											 }
-										?> 
-									</div>
-							</div>
 							
-							<div class="form-group">
-								<label>Failure Rate</label>
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-book"></i>
-										</div>
-										<textarea id="failureratew" row='1' name="failureratew" type="float" class="form-control" placeholder="Nilai Failure Rate"></textarea>
-									</div>
-							</div>
 							
 							<div class="modal-footer">
 								<button class="btn" name="Calc" type="submit">

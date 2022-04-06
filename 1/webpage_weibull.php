@@ -42,8 +42,9 @@ include "auth_user.php";
           </div><!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
               <li class="header"><h4><b><center>Menu Panel</center></b></h4></li>
-              <li class="active"><a href="index.php"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+              <li><a href="index.php"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
 			        <li><a href="kerusakan.php"><i class="fa fa-user"></i><span>Kerusakan</span></a></li>
+              <li class="active"><a href="kuantitatif.php"><i class="fa fa-gear"></i><span>Data Kuantitatif</span></a></li>
 			        <li><a href="komponen.php"><i class="fa fa-users"></i><span>Komponen</span></a></li>
 			        <li><a href="parameter1.php"><i class="fa fa-columns"></i><span>Severity</span></a></li>
 			        <li><a href="parameter2.php"><i class="fa fa-book"></i><span>Occurance</span></a></li>
@@ -77,8 +78,8 @@ include "auth_user.php";
           <center><img src="../aset/foto/pens.png" width="225" height="225" /></center>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                <iframe src="https://reliabilityanalyticstoolkit.appspot.com/weibull_distribution" name="iframe_a" height="600px" width="100%" title="Iframe Example"></iframe>
-                    <p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+                <iframe src="https://reliabilityanalyticstoolkit.appspot.com/weibull_distribution" name="iframe_a" height="650px" width="100%"></iframe>
+                    
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->

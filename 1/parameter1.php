@@ -34,6 +34,7 @@ include "auth_user.php";
               
 			  		<li><a href="index.php"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
 					<li><a href="kerusakan.php"><i class="fa fa-user"></i><span>Kerusakan</span></a></li>
+					<li><a href="kuantitatif.php"><i class="fa fa-gear"></i><span>Data Kuantitatif</span></a></li>
 			        <li><a href="komponen.php"><i class="fa fa-columns"></i><span>Komponen</span></a></li>
 					<li class="active"><a href="parameter1.php"><i class="fa fa-columns"></i><span>Severity</span></a></li>
 					<li><a href="parameter2.php"><i class="fa fa-columns"></i><span>Occurance</span></a></li>
