@@ -67,6 +67,7 @@ include "auth_user.php";
                 </div><!-- /.box-header -->
                 <div class="box-body">
 				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalAdd" data-toggle="modal"><i class="fa fa-plus"></i> Add</button></a>
+				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalHitung" data-toggle="modal"><i class="fa fa-plus"></i> Calculate</button></a>
                   <br></br>
 				  <table id="data1" class="table table-bordered table-striped table-scalable">
 						<?php
@@ -150,7 +151,7 @@ include "auth_user.php";
 											$shape = $_POST['shape'];
  											$scale = $_POST['scale'];
 											$timew  = $_POST['timew'];
-        										{
+											{
               									 echo exp((-1*pow($timew/$scale,$shape)));
        											 }
 										?> 
@@ -163,7 +164,7 @@ include "auth_user.php";
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<textarea id="failurerate" row='1' name="scale" type="float" class="form-control" placeholder="Nilai Failure Rate"></textarea>
+										<textarea id="failureratew" row='1' name="failureratew" type="float" class="form-control" placeholder="Nilai Failure Rate"></textarea>
 									</div>
 							</div>
 							
@@ -183,9 +184,112 @@ include "auth_user.php";
 				</div>
 			</div>
 		</div>
-		
+		<!-- Modal Hitung -->
+		<div id="ModalHitung" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Tambah Data Kuantitatif</h4>
+					</div>
+					<div class="modal-body">
+						<form action="kuantitatif_edit.php" name="modal_popup" enctype="multipart/form-data" method="post">
+							<div class="form-group">
+								<label>Komponen</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<select name="kode_kuantitatif" class="form-control">
+										<?php
+											
+											$querykomponen = mysqli_query($konek, "SELECT * FROM komponen");
+											if($querykomponen == false){
+												die("Terdapat Kesalahan : ". mysqli_error($konek));
+											}
+											while($komponen = mysqli_fetch_array($querykomponen)){
+												echo "<option value='$komponen[Kode_Komponen]'>$komponen[Nama_Komponen]</option>";
+											}
+
+													
+											
+										?>
+										</select>
+									</div>
+							</div>
+							<div class="form-group">
+								<label>Shape</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-book"></i>
+										</div>
+										<input id="shape" row='1' name="shape" type="float" class="form-control" placeholder="Parameter Shape"></input>
+									</div>
+							</div>
+							<div class="form-group">
+								<label>Scale</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-book"></i>
+										</div>
+										<input id="scale" row='1' name="scale" type="float" class="form-control" placeholder="Parameter Scale"></input>
+									</div>
+							</div>
+							<div class="form-group">
+								<label>Time</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-book"></i>
+										</div>
+										<input id="timew" row='1' name="timew" type="float" class="form-control" placeholder="Waktu dalam jam"></input>
+									</div>
+							</div>
+							<div class="form-group">
+								<label>Reliability</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-book"></i>
+										</div>
+										<?php
+										if(isset($_POST['Calc']))
+											$shape = $_POST['shape'];
+ 											$scale = $_POST['scale'];
+											$timew  = $_POST['timew'];
+											{
+              									 echo exp((-1*pow($timew/$scale,$shape)));
+       											 }
+										?> 
+									</div>
+							</div>
+							
+							<div class="form-group">
+								<label>Failure Rate</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-book"></i>
+										</div>
+										<textarea id="failureratew" row='1' name="failureratew" type="float" class="form-control" placeholder="Nilai Failure Rate"></textarea>
+									</div>
+							</div>
+							
+							<div class="modal-footer">
+								<button class="btn" name="Calc" type="submit">
+									Calculate
+								</button>
+								<button class="btn btn-success" type="submit">
+									Add
+								</button>
+								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Modal Popup pegawai Edit -->
-		<div id="ModalEditKuantitatif class="modal fade" tabindex="-1" role="dialog"></div>
+		<div id="ModalEditKuantitati" class="modal fade" tabindex="-1" role="dialog"></div>
 		
 		<!-- Modal Popup untuk delete--> 
 		<div class="modal fade" id="modal_delete">

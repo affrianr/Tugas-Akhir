@@ -10,7 +10,7 @@ $timew					= $_POST["timew"];
 $reliabilityw			= $_POST["reliabilityw"];
 $failureratew			= $_POST["failureratew"];
 
-if($add = mysqli_query($konek, "INSERT INTO kuantitatif(kode_kuantitatif, shape, scale, timew, reliabilityw, failureratew) VALUES ('$kode_kuantitatif', '$shape', '$scale', 'timew', '$reliabilityw', '$failureratew')")){
+if($add = mysqli_query($konek, "INSERT INTO kuantitatif(kode_kuantitatif, shape, scale, timew, reliabilityw, failureratew) VALUES ('$kode_kuantitatif', '$shape', '$scale', '$timew', '$reliabilityw', '$failureratew')")){
 	header("Location: kuantitatif.php");
 	exit();
 }

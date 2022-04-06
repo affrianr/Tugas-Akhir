@@ -91,7 +91,20 @@
 					}
 				});
 			});
-			
+		// kuantitatif
+		$(".open_modal").click(function(e) {
+			var m = $(this).attr("id");
+				$.ajax({
+					url: "kuantitatif_modal_edit.php",
+					type: "GET",
+					data : {Id_kuantitatif: m,},
+					success: function (ajaxData){
+					$("#ModalEditKuantitati").html(ajaxData);
+					$("#ModalEditKuantitati").modal('show',{backdrop: 'true'});
+					}
+				});
+			});
+				
 		// Komponen
 		$(".open_modal").click(function(e) {
 			var m = $(this).attr("id");
