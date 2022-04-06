@@ -88,14 +88,14 @@ include "auth_user.php";
 						<h4 class="modal-title">Tambah Data Kuantitatif</h4>
 					</div>
 					<div class="modal-body">
-						<form action="kerusakan_add.php" name="modal_popup" enctype="multipart/form-data" method="post">
+						<form action="kuantitatif_add.php" name="modal_popup" enctype="multipart/form-data" method="post">
 							<div class="form-group">
 								<label>Komponen</label>
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-user"></i>
 										</div>
-										<select name="kode_komponen_rusak" class="form-control">
+										<select name="kode_kuantitatif" class="form-control">
 										<?php
 											
 											$querykomponen = mysqli_query($konek, "SELECT * FROM komponen");
@@ -118,7 +118,7 @@ include "auth_user.php";
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<textarea id="scale" row='1' name="scale" type="float" class="form-control" placeholder="Parameter Shape"></textarea>
+										<input id="shape" row='1' name="shape" type="float" class="form-control" placeholder="Parameter Shape"></input>
 									</div>
 							</div>
 							<div class="form-group">
@@ -127,16 +127,16 @@ include "auth_user.php";
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<textarea id="scale" row='1' name="scale" type="float" class="form-control" placeholder="Parameter Scale"></textarea>
+										<input id="scale" row='1' name="scale" type="float" class="form-control" placeholder="Parameter Scale"></input>
 									</div>
 							</div>
 							<div class="form-group">
-								<label>time</label>
+								<label>Time</label>
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<textarea id="time" row='1' name="time" type="float" class="form-control" placeholder="Waktu"></textarea>
+										<input id="timew" row='1' name="timew" type="float" class="form-control" placeholder="Waktu dalam jam"></input>
 									</div>
 							</div>
 							<div class="form-group">
@@ -147,11 +147,11 @@ include "auth_user.php";
 										</div>
 										<?php
 										if(isset($_POST['Calc']))
-											$shape = floatval($_POST['shape']);
- 											$scale = floatval($_POST['scale']);
-											$time  = floatval($_POST['time']);
+											$shape = $_POST['shape'];
+ 											$scale = $_POST['scale'];
+											$timew  = $_POST['timew'];
         										{
-              									 echo exp((-1*pow($time/$scale,$shape)));
+              									 echo exp((-1*pow($timew/$scale,$shape)));
        											 }
 										?> 
 									</div>
@@ -168,6 +168,9 @@ include "auth_user.php";
 							</div>
 							
 							<div class="modal-footer">
+								<button class="btn" name="Calc" type="submit">
+									Calculate
+								</button>
 								<button class="btn btn-success" type="submit">
 									Add
 								</button>
@@ -182,7 +185,7 @@ include "auth_user.php";
 		</div>
 		
 		<!-- Modal Popup pegawai Edit -->
-		<div id="ModalEditKerusakan" class="modal fade" tabindex="-1" role="dialog"></div>
+		<div id="ModalEditKuantitatif class="modal fade" tabindex="-1" role="dialog"></div>
 		
 		<!-- Modal Popup untuk delete--> 
 		<div class="modal fade" id="modal_delete">
