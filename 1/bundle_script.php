@@ -99,8 +99,8 @@
 					type: "GET",
 					data : {Id_kuantitatif: m,},
 					success: function (ajaxData){
-					$("#ModalEditKuantitati").html(ajaxData);
-					$("#ModalEditKuantitati").modal('show',{backdrop: 'true'});
+					$("#ModalEditKuantitatif").html(ajaxData);
+					$("#ModalEditKuantitatif").modal('show',{backdrop: 'true'});
 					}
 				});
 			});

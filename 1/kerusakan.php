@@ -107,8 +107,6 @@ include "auth_user.php";
 												echo "<option value='$komponen[Kode_Komponen]'>$komponen[Nama_Komponen]</option>";
 											}
 
-													
-											
 										?>
 										</select>
 									</div>

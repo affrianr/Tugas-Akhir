@@ -1,5 +1,7 @@
 <?php
 
+use LDAP\Result;
+
 session_start();
 include "../koneksi.php";
 include "auth_user.php";
@@ -142,15 +144,37 @@ include "auth_user.php";
 										<input id="timew" row='1' name="timew" type="float" class="form-control" placeholder="Waktu dalam jam"></input>
 									</div>
 							</div>
-							
+							<div class="form-group">
+								<label>Reliability</label>
+								<div class="input-group">
+									<i class="fa fa-book"></i>
+								</div>
+								<output id="reliability" row='1' name="realibilityw" type="float" class="form-control">
+									<?php
+								if(isset($_POST['calculate'])){
+								$result= 0;
+           						 $shape=$_POST['shape'];
+           						 $scale=$_POST['scale'];
+								 $timew=$_POST['timew'];
+								 {
+									 $result = exp((-1*pow($timew/$scale,$shape)));
+									 echo $result;
+								 }
+
+								   } 
+            					?>
+								</output>
+								
+							</div>
 							
 							<div class="modal-footer">
-								<button class="btn" name="Calc" type="submit">
-									Calculate
-								</button>
-								<button class="btn btn-success" type="submit">
+							
+							<input type="submit" name="calculate" value="calculate">
+								
+								</input>
+								<!-- <button class="btn btn-success" type="submit" name="add">
 									Add
-								</button>
+								</button> -->
 								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
 									Cancel
 								</button>
@@ -161,7 +185,7 @@ include "auth_user.php";
 			</div>
 		</div>
 		<!-- Modal Hitung -->
-		<div id="ModalHitung" class="modal fade" tabindex="-1" role="dialog">
+		<!-- <div id="ModalHitung" class="modal fade" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -186,9 +210,6 @@ include "auth_user.php";
 											while($komponen = mysqli_fetch_array($querykomponen)){
 												echo "<option value='$komponen[Kode_Komponen]'>$komponen[Nama_Komponen]</option>";
 											}
-
-													
-											
 										?>
 										</select>
 									</div>
@@ -227,10 +248,10 @@ include "auth_user.php";
 											<i class="fa fa-book"></i>
 										</div>
 										<?php
-										if(isset($_POST['Calc']))
-											$shape = $_POST['shape'];
- 											$scale = $_POST['scale'];
-											$timew  = $_POST['timew'];
+										
+											$shape = floatval($_POST['shape']);
+ 											$scale = floatval($_POST['scale']);
+											$timew  = floatval($_POST['timew']);
 											{
               									 echo exp((-1*pow($timew/$scale,$shape)));
        											 }
@@ -249,9 +270,7 @@ include "auth_user.php";
 							</div>
 							
 							<div class="modal-footer">
-								<button class="btn" name="Calc" type="submit">
-									Calculate
-								</button>
+								
 								<button class="btn btn-success" type="submit">
 									Add
 								</button>
@@ -263,9 +282,9 @@ include "auth_user.php";
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Modal Popup pegawai Edit -->
-		<div id="ModalEditKuantitati" class="modal fade" tabindex="-1" role="dialog"></div>
+		<div id="ModalEditKuantitatif" class="modal fade" tabindex="-1" role="dialog"></div>
 		
 		<!-- Modal Popup untuk delete--> 
 		<div class="modal fade" id="modal_delete">

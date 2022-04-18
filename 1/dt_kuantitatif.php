@@ -3,13 +3,14 @@
 						<th>Komponen</th>
 						<th>Shape</th>
 						<th>Scale</th>
+						<th>Time</th>
 						<th>Reliability</th>
 						<th>Failure Rate</th>			
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						$querykuantitatif = mysqli_query ($konek, "SELECT Id_kuantitatif, kode_kuantitatif, shape, scale, reliabilityw, failureratew
+						$querykuantitatif = mysqli_query ($konek, "SELECT Id_kuantitatif, kode_kuantitatif, shape, scale, timew, reliabilityw, failureratew
 							FROM kuantitatif 
 							INNER JOIN komponen ON kode_kuantitatif=Kode_Komponen");
 						if($querykuantitatif == false){
@@ -22,6 +23,7 @@
 									<td>$kuantitatif[kode_kuantitatif]</td>
 									<td>$kuantitatif[shape]</td>
 									<td>$kuantitatif[scale]</td>
+									<td>$kuantitatif[timew]</td>
 									<td>$kuantitatif[reliabilityw]</td>
 									<td>$kuantitatif[failureratew]</td>
 									<td>
