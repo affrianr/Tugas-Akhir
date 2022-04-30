@@ -13,29 +13,7 @@ $querykuantitatif = mysqli_query($konek, "SELECT * FROM kuantitatif WHERE Id_kua
 	while($kuantitatif = mysqli_fetch_array($querykuantitatif)){
 
 ?>
-	<link rel="stylesheet" href="../aset/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-	<script src="../aset/plugins/daterangepicker/moment.min.js"></script>
-	<script src="../aset/plugins/daterangepicker/daterangepicker.js"></script>
-	<script src="../aset/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-	<!-- page script -->
-    <script>
-      $(function () {	
-		// Daterange Picker
-		  $('#tanggal').daterangepicker({
-			  singleDatePicker: true,
-			  showDropdowns: true,
-			  format: 'YYYY-MM-DD'
-		  });
-      });
-    </script>
-	<!-- Date Time Picker -->
-	<script>
-		$(function (){
-			$('#Jam').datetimepicker({
-				format: 'HH:mm'
-			});
-		});
-	</script>
+
 <!-- Modal Popup komponen -->
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -55,7 +33,7 @@ $querykuantitatif = mysqli_query($konek, "SELECT * FROM kuantitatif WHERE Id_kua
 										<select name="kode_kuantitatif" class="form-control">
 										<?php
 											
-											$querykntttf = mysqli_query($konek, "SELECT kode_kuantitatif, Kode_Komponen, Nama_Komponen FROM kuantitatif INNER JOIN komponen ON kode_kuantitatif=Kode_Komponen WHERE Id_kuantitatif='$Id_kuantitatif'");
+											$querykntttf = mysqli_query($konek, "SELECT kode_kuantitatif, Kode_Komponen, Nama_Komponen FROM kuantitatif INNER JOIN komponen ON kode_kuantitatif = Kode_Komponen WHERE Id_kuantitatif = '$Id_kuantitatif'");
 											if ($querykntttf == false){
 												die ("Terdapat Kesalahan : ". mysqli_error($konek));
 											}
@@ -83,8 +61,8 @@ $querykuantitatif = mysqli_query($konek, "SELECT * FROM kuantitatif WHERE Id_kua
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<!-- <input name="shape" type="text" class="form-control" value="<?php echo $kuantitatif["shape"]; ?>"/> -->
-										<textarea id='shp' row='1' name="shape" type="float" class="form-control"><?php echo $kuantitatif["shape"]; ?></textarea>
+										
+										<textarea id='shp' row='1' name="shape" type="edit" class="form-control"><?php echo $kuantitatif["shape"]; ?></textarea>
 									</div>
 							</div>
 							<div class="form-group">
@@ -93,30 +71,11 @@ $querykuantitatif = mysqli_query($konek, "SELECT * FROM kuantitatif WHERE Id_kua
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<!-- <input name="scale" type="text" class="form-control" value="<?php echo $kuantitatif["scale"]; ?>"/> -->
+									
 										<textarea id='scl' row='1' name="scale" type="float" class="form-control"><?php echo $kuantitatif["scale"]; ?></textarea>
 									</div>
 							</div>
-							<div class="form-group">
-								<label>Reliability</label>
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-book"></i>
-										</div>
-										<!-- <input name="reliabilityw" type="text" class="form-control" value="<?php echo $kuantitatif["reliabilityw"]; ?>"/> -->
-										<textarea id='rlbw' row='1' name="reliabilityw" type="float" class="form-control"><?php echo $kuantitatif["reliabilityw"]; ?></textarea>
-									</div>
-							</div>
-							<div class="form-group">
-								<label>Failure Rate</label>
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-book"></i>
-										</div>
-										<!-- <input name="falurerate_w" type="text" class="form-control" value="<?php echo $kuantitatif["failureratew"]; ?>"/> -->
-										<textarea id='flrw' row='1' name="failureratew" type="float" class="form-control"><?php echo $kuantitatif["failureratew"]; ?></textarea>
-									</div>
-							</div>
+							
 							<div class="modal-footer">
 								<button class="btn btn-success" type="submit">
 									Add

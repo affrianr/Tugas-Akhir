@@ -152,10 +152,10 @@ include "auth_user.php";
 								<output id="reliability" row='1' name="realibilityw" type="float" class="form-control">
 									<?php
 								if(isset($_POST['calculate'])){
-								$result= 0;
-           						 $shape=$_POST['shape'];
-           						 $scale=$_POST['scale'];
-								 $timew=$_POST['timew'];
+								 $result = 0;
+           						 $shape = (float) $_POST['shape'];
+           						 $scale = (float) $_POST['scale'];
+								 $timew = (float) $_POST['timew'];
 								 {
 									 $result = exp((-1*pow($timew/$scale,$shape)));
 									 echo $result;

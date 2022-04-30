@@ -55,7 +55,7 @@ $querykerusakan = mysqli_query($konek, "SELECT * FROM kerusakan WHERE Id_kerusak
 										<select name="kode_komponen_rusak" class="form-control">
 										<?php
 											
-											$querykrsk = mysqli_query($konek, "SELECT kode_komponen_rusak, Kode_Komponen, Nama_Komponen FROM kerusakan INNER JOIN komponen ON kode_komponen_rusak=Kode_Komponen WHERE Id_kerusakan='$Id_kerusakan'");
+											$querykrsk = mysqli_query($konek, "SELECT kode_komponen_rusak, Kode_Komponen, Nama_Komponen FROM kerusakan INNER JOIN komponen ON kode_komponen_rusak = Kode_Komponen WHERE Id_kerusakan='$Id_kerusakan'");
 											if ($querykrsk == false){
 												die ("Terdapat Kesalahan : ". mysqli_error($konek));
 											}
