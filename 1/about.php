@@ -57,16 +57,29 @@ include "auth_user.php";
             <li><i class="fa fa-info-circle"></i> Tentang Aplikasi</li>
           </ol>
         </section>
-
+        
+                  
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-sm-3">
               <div class="box">
-                <div class="box-header">
-					<h1><center><b>Maintenance Management System | Admin</b></center></h1>
-					<center><img src="../aset/foto/pens.png" width="225" height="225" /></center>
-                </div><!-- /.box-header -->
+           
+                <div class="form-group-sm">
+                  <label for="email">Email address:</label>
+                  <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group-sm">
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="pwd">
+                </div>
+                <div class="form-group-sm">
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="pwd">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default">Submit</button>
+
                 <div class="box-body">
 					
                 </div><!-- /.box-body -->
@@ -74,7 +87,35 @@ include "auth_user.php";
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
-		
+        <section class="content">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="box">
+            <form action="hitung.php">
+                <div class="form-group-sm">
+                  <label for="shape">Email address:</label>
+                  <input type="floatval" class="form-control" id="shape">
+                </div>
+                <div class="form-group-sm">
+                  <label for="scale">Password:</label>
+                  <input type="floatval" class="form-control" id="scale">
+                </div>
+                <div class="form-group-sm">
+                  <label for="timew">Password:</label>
+                  <input type="floatval" class="form-control" id="timew">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default" name="calculate">Submit</button>
+            </form>
+                
+
+                <div class="box-body">
+					
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 	<?php
 		include	"content_footer.php";
