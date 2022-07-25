@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2022 at 05:27 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.4.22
+-- Waktu pembuatan: 21 Jun 2022 pada 14.28
+-- Versi server: 10.4.20-MariaDB
+-- Versi PHP: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kerusakan`
+-- Struktur dari tabel `kerusakan`
 --
 
 CREATE TABLE `kerusakan` (
@@ -40,17 +40,19 @@ CREATE TABLE `kerusakan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kerusakan`
+-- Dumping data untuk tabel `kerusakan`
 --
 
 INSERT INTO `kerusakan` (`Id_kerusakan`, `kode_komponen_rusak`, `keterangan_kerusakan`, `tanggal_kerusakan`, `jam`, `pegawai_bertugas`, `severity`, `occurance`, `detection`) VALUES
-(11, 'BFP11', 'ini keterangan', '0000-00-00', '11:11', '112233445566', 2, 1, 1),
-(15, 'HRSG12', 'ini keterangan lagi', '0000-00-00', '15:41', '1234567890111', 1, 2, 1);
+(11, 'BFP11', 'ini keterangan', '2022-01-21', '11:11', '112233445566', 2, 1, 1),
+(22, 'BFP11', 'coba', '0000-00-00', '11:44', '111111111111111', 1, 1, 1),
+(28, 'BARU12', '', '2020-01-15', '18:50', '111111111111111', 1, 1, 1),
+(33, 'HRSG13', '', '2022-06-15', '18:38', '111111111111111', 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komponen`
+-- Struktur dari tabel `komponen`
 --
 
 CREATE TABLE `komponen` (
@@ -61,10 +63,11 @@ CREATE TABLE `komponen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `komponen`
+-- Dumping data untuk tabel `komponen`
 --
 
 INSERT INTO `komponen` (`Kode_Komponen`, `Nama_Komponen`, `Fungsi_Komponen`, `Status_Komponen`) VALUES
+('BARU12', 'Baru', '', 'Aktif'),
 ('BFP11', 'BFP 1.1', '', 'Aktif'),
 ('HRSG12', 'HRSG 1.2', '', 'Aktif'),
 ('HRSG13', 'HRSG 1.3', '', 'Nonaktif');
@@ -72,23 +75,36 @@ INSERT INTO `komponen` (`Kode_Komponen`, `Nama_Komponen`, `Fungsi_Komponen`, `St
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kuantitatif`
+-- Struktur dari tabel `kuantitatif`
 --
 
 CREATE TABLE `kuantitatif` (
   `Id_kuantitatif` int(11) NOT NULL,
   `kode_kuantitatif` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `shape` float NOT NULL,
-  `scale` float NOT NULL,
-  `timew` float NOT NULL,
-  `reliabilityw` float NOT NULL,
-  `failureratew` float NOT NULL
+  `tanggal_rusak` datetime DEFAULT NULL,
+  `tanggal_selesai` datetime NOT NULL,
+  `nilai_ttf` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kuantitatif`
+--
+
+INSERT INTO `kuantitatif` (`Id_kuantitatif`, `kode_kuantitatif`, `tanggal_rusak`, `tanggal_selesai`, `nilai_ttf`) VALUES
+(43, 'HRSG12', '2022-06-08 00:00:00', '2022-06-13 00:00:00', 0),
+(44, 'HRSG12', '2022-06-14 00:00:00', '2022-06-15 00:00:00', 0),
+(45, 'BFP11', '2022-06-01 00:00:00', '2022-06-10 00:00:00', 0),
+(55, 'BARU12', '2022-06-12 00:00:00', '2022-06-14 00:00:00', 0),
+(56, 'BARU12', '2022-06-11 00:00:00', '2022-06-13 00:00:00', 0),
+(57, 'BARU12', '2022-06-01 21:19:00', '2022-06-14 21:19:00', 0),
+(58, 'BFP11', '2022-06-16 12:48:00', '2022-06-16 12:48:00', 0),
+(61, 'BFP11', '2022-06-20 23:51:00', '2022-06-30 23:52:00', 0),
+(62, 'HRSG12', '2022-06-21 13:24:00', '2022-06-30 13:24:00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameter1`
+-- Struktur dari tabel `parameter1`
 --
 
 CREATE TABLE `parameter1` (
@@ -98,7 +114,7 @@ CREATE TABLE `parameter1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `parameter1`
+-- Dumping data untuk tabel `parameter1`
 --
 
 INSERT INTO `parameter1` (`rating1`, `efek1`, `kriteria1`) VALUES
@@ -109,7 +125,7 @@ INSERT INTO `parameter1` (`rating1`, `efek1`, `kriteria1`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameter2`
+-- Struktur dari tabel `parameter2`
 --
 
 CREATE TABLE `parameter2` (
@@ -119,7 +135,7 @@ CREATE TABLE `parameter2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `parameter2`
+-- Dumping data untuk tabel `parameter2`
 --
 
 INSERT INTO `parameter2` (`rating2`, `efek2`, `kriteria2`) VALUES
@@ -129,7 +145,7 @@ INSERT INTO `parameter2` (`rating2`, `efek2`, `kriteria2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameter3`
+-- Struktur dari tabel `parameter3`
 --
 
 CREATE TABLE `parameter3` (
@@ -139,7 +155,7 @@ CREATE TABLE `parameter3` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `parameter3`
+-- Dumping data untuk tabel `parameter3`
 --
 
 INSERT INTO `parameter3` (`rating3`, `efek3`, `kriteria3`) VALUES
@@ -149,7 +165,7 @@ INSERT INTO `parameter3` (`rating3`, `efek3`, `kriteria3`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pegawai`
+-- Struktur dari tabel `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -162,7 +178,7 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pegawai`
+-- Dumping data untuk tabel `pegawai`
 --
 
 INSERT INTO `pegawai` (`NIP`, `Nama_Pegawai`, `Tanggal_Lahir`, `JK`, `No_Telp`, `Alamat`) VALUES
@@ -173,7 +189,7 @@ INSERT INTO `pegawai` (`NIP`, `Nama_Pegawai`, `Tanggal_Lahir`, `JK`, `No_Telp`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -186,7 +202,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`Id_User`, `Id_Usergroup_User`, `Username`, `Password`, `Foto`, `nama_lengkap`) VALUES
@@ -198,7 +214,7 @@ INSERT INTO `user` (`Id_User`, `Id_Usergroup_User`, `Username`, `Password`, `Fot
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroup`
+-- Struktur dari tabel `usergroup`
 --
 
 CREATE TABLE `usergroup` (
@@ -207,7 +223,7 @@ CREATE TABLE `usergroup` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `usergroup`
+-- Dumping data untuk tabel `usergroup`
 --
 
 INSERT INTO `usergroup` (`Id_Usergroup`, `Nama_Usergroup`) VALUES
@@ -220,94 +236,101 @@ INSERT INTO `usergroup` (`Id_Usergroup`, `Nama_Usergroup`) VALUES
 --
 
 --
--- Indexes for table `kerusakan`
+-- Indeks untuk tabel `kerusakan`
 --
 ALTER TABLE `kerusakan`
   ADD PRIMARY KEY (`Id_kerusakan`),
-  ADD UNIQUE KEY `pegawai_bertugas` (`pegawai_bertugas`),
   ADD KEY `kode_komponen_rusak` (`kode_komponen_rusak`),
   ADD KEY `FK_rating1` (`severity`) USING BTREE,
   ADD KEY `FK_rating2` (`occurance`) USING BTREE,
-  ADD KEY `FK_rating3` (`detection`) USING BTREE;
+  ADD KEY `FK_rating3` (`detection`) USING BTREE,
+  ADD KEY `pegawai_bertugas` (`pegawai_bertugas`) USING BTREE;
 
 --
--- Indexes for table `komponen`
+-- Indeks untuk tabel `komponen`
 --
 ALTER TABLE `komponen`
   ADD PRIMARY KEY (`Kode_Komponen`);
 
 --
--- Indexes for table `kuantitatif`
+-- Indeks untuk tabel `kuantitatif`
 --
 ALTER TABLE `kuantitatif`
-  ADD PRIMARY KEY (`Id_kuantitatif`);
+  ADD PRIMARY KEY (`Id_kuantitatif`),
+  ADD KEY `kode_kuantitatif` (`kode_kuantitatif`);
 
 --
--- Indexes for table `parameter1`
+-- Indeks untuk tabel `parameter1`
 --
 ALTER TABLE `parameter1`
   ADD PRIMARY KEY (`rating1`),
   ADD KEY `rating1` (`rating1`);
 
 --
--- Indexes for table `parameter2`
+-- Indeks untuk tabel `parameter2`
 --
 ALTER TABLE `parameter2`
   ADD PRIMARY KEY (`rating2`);
 
 --
--- Indexes for table `parameter3`
+-- Indeks untuk tabel `parameter3`
 --
 ALTER TABLE `parameter3`
   ADD PRIMARY KEY (`rating3`);
 
 --
--- Indexes for table `pegawai`
+-- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`NIP`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`Id_User`),
   ADD KEY `FK_user_usergroup` (`Id_Usergroup_User`);
 
 --
--- Indexes for table `usergroup`
+-- Indeks untuk tabel `usergroup`
 --
 ALTER TABLE `usergroup`
   ADD PRIMARY KEY (`Id_Usergroup`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `kerusakan`
+-- AUTO_INCREMENT untuk tabel `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `Id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `kuantitatif`
+--
+ALTER TABLE `kuantitatif`
+  MODIFY `Id_kuantitatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `Id_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `usergroup`
+-- AUTO_INCREMENT untuk tabel `usergroup`
 --
 ALTER TABLE `usergroup`
   MODIFY `Id_Usergroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `kerusakan`
+-- Ketidakleluasaan untuk tabel `kerusakan`
 --
 ALTER TABLE `kerusakan`
   ADD CONSTRAINT `kerusakan_ibfk_1` FOREIGN KEY (`kode_komponen_rusak`) REFERENCES `komponen` (`Kode_Komponen`),
@@ -315,6 +338,12 @@ ALTER TABLE `kerusakan`
   ADD CONSTRAINT `kerusakan_ibfk_3` FOREIGN KEY (`severity`) REFERENCES `parameter1` (`rating1`),
   ADD CONSTRAINT `kerusakan_ibfk_4` FOREIGN KEY (`occurance`) REFERENCES `parameter2` (`rating2`),
   ADD CONSTRAINT `kerusakan_ibfk_5` FOREIGN KEY (`detection`) REFERENCES `parameter3` (`rating3`);
+
+--
+-- Ketidakleluasaan untuk tabel `kuantitatif`
+--
+ALTER TABLE `kuantitatif`
+  ADD CONSTRAINT `kuantitatif_ibfk_1` FOREIGN KEY (`kode_kuantitatif`) REFERENCES `komponen` (`Kode_Komponen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

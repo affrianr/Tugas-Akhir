@@ -69,6 +69,7 @@ include "auth_user.php";
                 <div class="box-body">
 				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalAdd" data-toggle="modal"><i class="fa fa-plus"></i> Add</button></a>
                   <br></br>
+				  
 				  <table id="data1" class="table table-bordered table-striped table-scalable">
 						<?php
 							include "dt_kerusakan.php";
@@ -126,7 +127,7 @@ include "auth_user.php";
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input id="Tanggal_kerusakan" name="tanggal_kerusakan" type="text" class="form-control">
+										<input id="Tanggal" name="tanggal_kerusakan" type="text" class="form-control">
 									</div>
 							</div>
 							<div class="form-group">

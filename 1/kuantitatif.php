@@ -1,6 +1,8 @@
-<?php
 
-use LDAP\Result;
+<?php
+use MathPHP\Functions\Special;
+
+// use LDAP\Result;
 
 session_start();
 include "../koneksi.php";
@@ -73,12 +75,14 @@ include "auth_user.php";
 				<a href="#"><button class="btn btn-success" type="button" data-target="#ModalHitung" data-toggle="modal"><i class="fa fa-plus"></i> Calculate</button></a>
 				<a href="webpage_weibull.php"><button class="btn btn-success" type="button" data-toggle="modal"><i class="fa fa-plus"></i> Visualization Tools</button></a>
                   <br></br>
-				  <table id="data1" class="table table-bordered table-striped table-scalable">
+                  
+				  <table class="table table-bordered table-striped table-scalable">
 						<?php
 							include "dt_kuantitatif.php";
 						?>
+            
                   </table>
-				  
+                  
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
@@ -90,29 +94,80 @@ include "auth_user.php";
             <div class="col-sm-3 py-5">
               <div class="box">
 			  <form method='post'>
-     <input type='text' name='shape'class="form-control">
-     <input type='text' name='scale'class="form-control">
-     <input type='text' name='time' class="form-control">
-     <input type='submit' name='calculate'>
+    <label>Normal</label>
+      
+     <input type='text' name='ave'class="form-control" placeholder="Location">
+     <input type='text' name='stdev'class="form-control" placeholder="Shape">
+     <input type='text' name='x' class="form-control" placeholder="Time">
+     <input type='submit' name='calculate1' value="sub">
      
     
 
 </form>
 <?php
-                                if(isset($_POST['calculate'])){
-                                
-                                    $shape=$_POST['shape'];
-                                    $scale=$_POST['scale'];
-                                 	$time=$_POST['time'];
-                                 {
-                                     $reliabilityw = exp((-1*pow($time/$scale,$shape)));
+                                if(isset($_POST['calculate1'])){
+                                  
+                                    $ave=$_POST['ave'];
+                                    $stdev=$_POST['stdev'];
+                                 	$x=$_POST['x'];
+                                {
+                                     $reliabilityn = (1 - (round(stats_cdf_normal($x, $ave, $stdev, 1), 6)));
                                     /* echo "Result: ". $reliabilityw; */
+									$failureraten =  round(((stats_dens_normal($x, $ave, $stdev))/$reliabilityn), 6);
+                  $mttf1 =  $ave;
                                  }
 
                                    } 
                                 ?>
-<br>Hasil<input type="text" value="<?php echo $reliabilityw; ?>" class="form-control"></br>
+                </br>
+                Reliability<input type="text" value="<?php echo $reliabilityn; ?>" class="form-control"></br>
+                Failure Rate<input type="text" value="<?php echo $failureraten; ?>" class="form-control"></br>
+                MTTF<input type="text" value="<?php echo $mttf1; ?>" class="form-control">
 
+
+                <div class="box-body">
+					
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+
+			<div class="col-sm-3 py-5">
+              <div class="box">
+			  <form method='post'>
+          <label>Weibull 2 Parameter</label>
+     <input type='text' name='shape'class="form-control" placeholder="Shape">
+     <input type='text' name='scale'class="form-control" placeholder="Scale">
+     <input type='text' name='time' class="form-control" placeholder="Time">
+     <input type='submit' name='calculate'>
+     
+    
+
+</form>
+
+<?php
+                                if(isset($_POST['calculate'])){
+                                 
+                                    $shape=$_POST['shape'];
+                                    $scale=$_POST['scale'];
+                                 	  $time=$_POST['time'];
+                                    
+                                 {
+                                 
+                                  $Γ = Special::gamma(1+(1/$shape));
+                                     $reliabilityw = exp((-1*pow($time/$scale,$shape)));
+                                    /* echo "Result: ". $reliabilityw; */
+                                     $failureratew = ($shape/$scale)*pow(($time/$scale),($shape-1));
+                                    
+                                    $mttf2 =  ($scale*Special::gamma($Γ));
+                                
+                                                                 }
+
+                                   } 
+                                ?>
+                                </br>
+Reliability<input type="text" value="<?php echo $reliabilityw; ?>" class="form-control"></br>
+Failure Rate<input type="text" value="<?php echo $failureratew; ?>" class="form-control"></br>
+MTTF<input type="text" value="<?php echo $mttf2; ?>" class="form-control">
 
                 <div class="box-body">
 					
@@ -122,29 +177,35 @@ include "auth_user.php";
 			<div class="col-sm-3 py-5">
               <div class="box">
 			  <form method='post'>
-     <input type='text' name='shape'class="form-control">
-     <input type='text' name='scale'class="form-control">
-     <input type='text' name='time' class="form-control">
-     <input type='submit' name='calculate'>
+    <label>Lognormal</label>
+      
+     <input type='text' name='ave2'class="form-control" placeholder="Location">
+     <input type='text' name='stdev2'class="form-control" placeholder="Shape">
+     <input type='text' name='x2' class="form-control" placeholder="Time">
+     <input type='submit' name='calculate3'>
      
     
 
 </form>
 <?php
-                                if(isset($_POST['calculate'])){
+                                if(isset($_POST['calculate3'])){
                                 
-                                    $shape=$_POST['shape'];
-                                    $scale=$_POST['scale'];
-                                 	$time=$_POST['time'];
+                                    $ave2=$_POST['ave2'];
+                                    $stdev2=$_POST['stdev2'];
+                                 	$x2=$_POST['x2'];
                                  {
-                                     $reliabilityw = exp((-1*pow($time/$scale,$shape)));
+                                     $reliabilityl = (1 - (round(stats_cdf_normal(log($x2), $ave2, $stdev2, 1), 6)));
                                     /* echo "Result: ". $reliabilityw; */
+									$failureratel =  round(((stats_dens_normal(log($x2), $ave2, $stdev2))/$reliabilityl), 6);
+                  $mttf3 = exp($ave2+($stdev2^2)/2);
                                  }
 
                                    } 
                                 ?>
-<br>Hasil<input type="text" value="<?php echo $reliabilityw; ?>" class="form-control"></br>
-
+                                </br>
+Reliability<input type="text" value="<?php echo $reliabilityl; ?>" class="form-control"></br>
+Failure Rate<input type="text" value="<?php echo $failureratel; ?>" class="form-control"></br>
+MTTF<input type="text" value="<?php echo $mttf3; ?>" class="form-control"></br>
 
                 <div class="box-body">
 					
@@ -154,69 +215,44 @@ include "auth_user.php";
 			<div class="col-sm-3 py-5">
               <div class="box">
 			  <form method='post'>
-     <input type='text' name='shape'class="form-control">
-     <input type='text' name='scale'class="form-control">
-     <input type='text' name='time' class="form-control">
-     <input type='submit' name='calculate'>
+    <label>Eksponensial</label>
+      
+     <input type='text' name='lambda'class="form-control" placeholder="Rate">
+     <input type='text' name='x3' class="form-control" placeholder="Time">
+     <input type='submit' name='calculate4'>
      
     
 
 </form>
 <?php
-                                if(isset($_POST['calculate'])){
+                                if(isset($_POST['calculate4'])){
                                 
-                                    $shape=$_POST['shape'];
-                                    $scale=$_POST['scale'];
-                                 	$time=$_POST['time'];
+                                  $lambda=$_POST['lambda'];
+                                 	$x3=$_POST['x3'];
                                  {
-                                     $reliabilityw = exp((-1*pow($time/$scale,$shape)));
+                                     $reliabilitye = exp((-$lambda)*$x3);
                                     /* echo "Result: ". $reliabilityw; */
+									$failureratel =  $lambda;
+                  $mttf4 = 1/$lambda;
                                  }
 
                                    } 
                                 ?>
-<br>Hasil<input type="text" value="<?php echo $reliabilityw; ?>" class="form-control"></br>
-
+                                </br>
+Reliability<input type="text" value="<?php echo $reliabilityl; ?>" class="form-control"></br>
+Failure Rate<input type="text" value="<?php echo $failureratel; ?>" class="form-control"></br>
+MTTF<input type="text" value="<?php echo $mttf4; ?>" class="form-control"></br>
 
                 <div class="box-body">
 					
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
-			<div class="col-sm-3 py-5">
-              <div class="box">
-			  <form method='post'>
-     <input type='text' name='shape'class="form-control">
-     <input type='text' name='scale'class="form-control">
-     <input type='text' name='time' class="form-control">
-     <input type='submit' name='calculate'>
-     
-    
-
-</form>
-<?php
-                                if(isset($_POST['calculate'])){
-                                
-                                    $shape=$_POST['shape'];
-                                    $scale=$_POST['scale'];
-                                 	$time=$_POST['time'];
-                                 {
-                                     $reliabilityw = exp((-1*pow($time/$scale,$shape)));
-                                    /* echo "Result: ". $reliabilityw; */
-                                 }
-
-                                   } 
-                                ?>
-<br>Hasil<input type="text" value="<?php echo $reliabilityw; ?>" class="form-control"></br>
-
-
-                <div class="box-body">
-					
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
         </section><!-- /.content -->
+          </div><!-- /.row -->
+
+        
+        
     </div><!-- /.content-wrapper -->
 		<!-- Modal Popup pegawai -->
 		<div id="ModalAdd" class="modal fade" tabindex="-1" role="dialog">
@@ -252,41 +288,30 @@ include "auth_user.php";
 									</div>
 							</div>
 							<div class="form-group">
-								<label>Shape</label>
+								<label>Tanggal Rusak</label>
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<input id="shape" row='1' name="shape" type="float" class="form-control" placeholder="Parameter Shape"></input>
+										<input row='1' name="tanggal_rusak" type="datetime-local" class="form-control" placeholder="Tanggal Rusak"></input>
 									</div>
 							</div>
 							<div class="form-group">
-								<label>Scale</label>
+								<label>Tanggal Perbaikan</label>
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-book"></i>
 										</div>
-										<input id="scale" row='1' name="scale" type="float" class="form-control" placeholder="Parameter Scale"></input>
-									</div>
-							</div>
-							<div class="form-group">
-								<label>Time</label>
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-book"></i>
-										</div>
-										<input id="timew" row='1' name="timew" type="float" class="form-control" placeholder="Waktu dalam jam"></input>
+										<input row='1' name="tanggal_selesai" type="datetime-local" class="form-control" placeholder="Tanggal Selesai"></input>
 									</div>
 							</div>
 							
 							<div class="modal-footer">
 							
-							<input type="submit" name="calculate" value="calculate">
-								
-								</input>
-								<!-- <button class="btn btn-success" type="submit" name="add">
+							
+								<button class="btn btn-success" type="submit" name="add">
 									Add
-								</button> -->
+								</button>
 								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
 									Cancel
 								</button>

@@ -11,8 +11,9 @@ $pegawai_bertugas		= $_POST["pegawai_bertugas"];
 $severity				= $_POST["severity"];
 $occurance				= $_POST["occurance"];
 $detection				= $_POST["detection"];
+$RPN					= $severity*$occurance*$detection;
 
-if($add = mysqli_query($konek, "INSERT INTO kerusakan(kode_komponen_rusak, keterangan_kerusakan, tanggal_kerusakan, jam, pegawai_bertugas, severity, occurance, detection) VALUES ('$kode_komponen_rusak', '$keterangan_kerusakan', '$tanggal_kerusakan', '$jam', '$pegawai_bertugas', '$severity', '$occurance', '$detection')")){
+if($add = mysqli_query($konek, "INSERT INTO kerusakan(kode_komponen_rusak, keterangan_kerusakan, tanggal_kerusakan, jam, pegawai_bertugas, severity, occurance, detection, RPN) VALUES ('$kode_komponen_rusak', '$keterangan_kerusakan', '$tanggal_kerusakan', '$jam', '$pegawai_bertugas', '$severity', '$occurance', '$detection', '$RPN')")){
 	header("Location: kerusakan.php");
 	exit();
 }
